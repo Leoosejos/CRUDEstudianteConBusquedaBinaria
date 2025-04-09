@@ -1,31 +1,29 @@
-package main.core.modelo;
+package test.core.modelo;
 
-import main.altas.Altas;
-import main.bajas.Bajas;
-import main.core.entrada.GestorEntrada;
-import main.core.salida.GestorSalida;
-import main.lista.Listado;
-import main.modificacion.Modificacion;
-import main.core.modelo.Asignatura;
+import test.altas.AltasTest;
+import test.bajas.BajasTest;
+import test.core.entrada.GestorEntradaTest;
+import test.core.salida.GestorSalidaTest;
+import test.lista.ListadoTest;
+import test.modificacion.ModificacionTest;
 
 import java.util.ArrayList;
 
-public class GestorEstudiantes {
-    private ArrayList<Estudiante> estudiantes;
-    private GestorEntrada entrada;
-    private GestorSalida salida;
-    private Altas altas;
-    private Bajas bajas;
+public class GestorEstudiantesTest {
+    private ArrayList<EstudianteTest> estudiantes;
+    private GestorEntradaTest entrada;
+    private GestorSalidaTest salida;
+    private AltasTest altas;
+    private BajasTest bajas;
 
-    public GestorEstudiantes() {
+    public GestorEstudiantesTest() {
         estudiantes = new ArrayList<>();
         inicializarDatos();
-        entrada = new GestorEntrada();
-        salida = new GestorSalida();
-        altas = new Altas(entrada, salida, estudiantes);
-        bajas = new Bajas(entrada, salida, estudiantes);
+        entrada = new GestorEntradaTest();
+        salida = new GestorSalidaTest();
+        altas = new AltasTest(entrada, salida, estudiantes);
+        bajas = new BajasTest(entrada, salida, estudiantes);
     }
-
 
     public void inicializarDatos() {
         estudiantes.add(crearEstudiante(1, "Juan Pérez", 18, "15/02/2005", "Matemáticas", 8.5, "Literatura", 7.5));
@@ -45,12 +43,12 @@ public class GestorEstudiantes {
         estudiantes.add(crearEstudiante(15, "Isabella Castro", 22, "16/08/2001", "Química", 7.7, "Biología", 8.2));
     }
 
-    private Estudiante crearEstudiante(int id, String nombre, int edad, String fechaNacimiento,
-                                       String asignatura1Nombre, double asignatura1Nota,
-                                       String asignatura2Nombre, double asignatura2Nota) {
-        Estudiante estudiante = new Estudiante(id, nombre, edad, fechaNacimiento);
-        Asignatura asignatura1 = new Asignatura(asignatura1Nombre, asignatura1Nota);
-        Asignatura asignatura2 = new Asignatura(asignatura2Nombre, asignatura2Nota);
+    private EstudianteTest crearEstudiante(int id, String nombre, int edad, String fechaNacimiento,
+                                           String asignatura1Nombre, double asignatura1Nota,
+                                           String asignatura2Nombre, double asignatura2Nota) {
+        EstudianteTest estudiante = new EstudianteTest(id, nombre, edad, fechaNacimiento);
+        AsignaturaTest asignatura1 = new AsignaturaTest(asignatura1Nombre, asignatura1Nota);
+        AsignaturaTest asignatura2 = new AsignaturaTest(asignatura2Nombre, asignatura2Nota);
         estudiante.setAsignaturas(asignatura1, asignatura2);
         return estudiante;
     }
@@ -64,12 +62,12 @@ public class GestorEstudiantes {
     }
 
     public void listarEstudiantes() {
-        Listado listado = new Listado(salida, estudiantes);
+        ListadoTest listado = new ListadoTest(salida, estudiantes);
         listado.listarEstudiantes();
     }
 
     public void modificarNota() {
-        Modificacion modificacion = new Modificacion(entrada, salida, estudiantes);
+        ModificacionTest modificacion = new ModificacionTest(entrada, salida, estudiantes);
         modificacion.modificarNota();
     }
 }
